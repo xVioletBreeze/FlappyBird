@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class BirdScript : MonoBehaviour
 {
+    private Animator anim;
     public Rigidbody2D birdRigidBody;
     public float flapStrength;
     public InputMap playerControls;
@@ -39,6 +40,7 @@ public class BirdScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class BirdScript : MonoBehaviour
             logic.GameOver();
             birdIsAlive = false;
         }
+        anim.SetBool("isAlive", birdIsAlive);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
